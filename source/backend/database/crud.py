@@ -1,5 +1,7 @@
 from sqlalchemy.orm import Session
 from . import models
+from fastapi import UploadFile
+import pandas as pd
 
 # Geolocation
 def get_location(db: Session, ip_base10: int):
@@ -11,3 +13,15 @@ def get_location(db: Session, ip_base10: int):
     
     country = results.country
     return country
+
+
+def upload_file(db: Session, file: UploadFile):
+
+    # Load CSV and insert content to DB
+    ## Prepare data
+    df = pd.read_csv(file.file, header = None)
+    df = df.rename({0:'ip_from', 1:'ip_to', 2:'country'}, axis=1)
+
+    ## Upload data
+    engine = db.get_bind()
+    df.to_sql('ip_geolocation', con=engine, if_exists='replace', index=False)

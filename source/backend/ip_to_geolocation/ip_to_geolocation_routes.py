@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from dependencies import get_db
-from database import crud 
+from database import crud
+from fastapi import File, UploadFile 
 
 router = APIRouter(
     #prefix="/",
@@ -20,3 +21,23 @@ def get_geolocation(ip: str, db: Session = Depends(get_db)):
     country = crud.get_location(db, ip_base10)
 
     return {'country': country}
+
+
+@router.post("/upload")
+def upload(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    try:
+        # Check if it is a CSV
+        if file.filename.split('.')[-1] != 'csv':
+            return {"message": "There was an error uploading the file. Expected a CSV file format."}
+
+        crud.upload_file(db, file)
+
+    except Exception as e:
+        print(e)
+        return {"message": "There was an error uploading the file"}
+
+    finally:
+        file.file.close()
+
+    return {"message": f"Successfully uploaded {file.filename}"}
+
