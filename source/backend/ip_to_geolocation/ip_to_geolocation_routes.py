@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, File, UploadFile
 from sqlalchemy.orm import Session
+import starlette.status as status
 from dependencies import get_db
 from database import crud
-from fastapi import File, UploadFile 
 
 router = APIRouter(
     #prefix="/",
@@ -28,16 +28,15 @@ def upload(file: UploadFile = File(...), db: Session = Depends(get_db)):
     try:
         # Check if it is a CSV
         if file.filename.split('.')[-1] != 'csv':
-            return {"message": "There was an error uploading the file. Expected a CSV file format."}
+            raise Exception("There was an error uploading the file. Expected a CSV file format.")
 
+        # Replace DB data with newer data
         crud.upload_file(db, file)
 
     except Exception as e:
-        print(e)
-        return {"message": "There was an error uploading the file"}
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
 
     finally:
         file.file.close()
 
     return {"message": f"Successfully uploaded {file.filename}"}
-
