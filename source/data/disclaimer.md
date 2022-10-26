@@ -1,0 +1,1 @@
+This dataset is available in the following [repository](https://github.com/sapics/ip-location-db). All credits of this dataset go to the owner of this account for making the data available for users.
