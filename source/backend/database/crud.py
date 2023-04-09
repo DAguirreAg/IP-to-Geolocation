@@ -24,4 +24,4 @@ def upload_file(db: Session, file: UploadFile):
 
     ## Upload data
     engine = db.get_bind()
-    df.to_sql('ip_geolocation', con=engine, if_exists='replace', index=False)
+    df.to_sql('ip_geolocation', con=engine, if_exists='append', index=False, index_label='id')
