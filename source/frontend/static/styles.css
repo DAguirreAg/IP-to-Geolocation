@@ -1,0 +1,39 @@
+
+body {
+    background-color: #010409;
+    color: white;
+}
+
+.content {
+    width: 80%;
+    margin: auto;
+    max-width: 500px;
+}
+
+#feedback-panel {
+    background-color: #161b22;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 15px;
+}
+
+#ipAddressForm {
+    width: 100%;
+}
+
+.input {
+    
+}
+
+#feedbackSubmitButton {
+    background-color: darkgoldenrod;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+}
+
+#feedbackSubmitButton:hover {
+    cursor: pointer;
+}
