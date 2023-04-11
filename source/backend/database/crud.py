@@ -23,5 +23,9 @@ def upload_file(db: Session, file: UploadFile):
     df = df.rename({0:'ip_from', 1:'ip_to', 2:'country'}, axis=1)
 
     ## Upload data
+    ### Truncate existing data
+    db.execute('''TRUNCATE TABLE ip_geolocation''')
+    db.commit()
+    
     engine = db.get_bind()
     df.to_sql('ip_geolocation', con=engine, if_exists='append', index=False, index_label='id')

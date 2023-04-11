@@ -10,7 +10,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-@router.get('/get_geolocation')
+@router.get('/geolocation')
 def get_geolocation(ip: str, db: Session = Depends(get_db)):
 
     # Convert IP to number
@@ -23,7 +23,7 @@ def get_geolocation(ip: str, db: Session = Depends(get_db)):
     return {'country': country}
 
 
-@router.post("/upload")
+@router.post("/new_geolocation_data")
 def upload(file: UploadFile = File(...), db: Session = Depends(get_db)):
     try:
         # Check if it is a CSV
