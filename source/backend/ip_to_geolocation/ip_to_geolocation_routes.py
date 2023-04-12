@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, File, UploadFile
 from sqlalchemy.orm import Session
 import starlette.status as status
 from dependencies import get_db
-from database import crud
+from sql_app import models
+import pandas as pd
 
 router = APIRouter(
     #prefix="/",
@@ -18,7 +19,12 @@ def get_geolocation(ip: str, db: Session = Depends(get_db)):
     ip_base10 = octets[0]*16777216 + octets[1]*65536 + octets[2]*256 + octets[3]*1
 
     # Find IP's geolocation
-    country = crud.get_location(db, ip_base10)
+    results = db.query(models.IP_Geolocation).filter(models.IP_Geolocation.ip_from <= ip_base10).filter(models.IP_Geolocation.ip_to >= ip_base10).first()
+
+    if results is None:
+        return {'country': 'Unknown'}
+    
+    country = results.country
 
     return {'country': country}
 
@@ -31,7 +37,18 @@ def upload(file: UploadFile = File(...), db: Session = Depends(get_db)):
             raise Exception("There was an error uploading the file. Expected a CSV file format.")
 
         # Replace DB data with newer data
-        crud.upload_file(db, file)
+        ## Load CSV and prepare data
+        df = pd.read_csv(file.file, header = None)
+        df = df.rename({0:'ip_from', 1:'ip_to', 2:'country'}, axis=1)
+
+        ## Upload data
+        ### Truncate existing data
+        db.execute('''TRUNCATE TABLE ip_geolocation''')
+        db.commit()
+        
+        engine = db.get_bind()
+        df.to_sql('ip_geolocation', con=engine, if_exists='append', index=False, index_label='id')
+
 
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))

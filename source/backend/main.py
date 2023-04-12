@@ -15,9 +15,6 @@ app = FastAPI(
     openapi_tags=Config.TAGS_METADATA
 )
 
-#engine = create_engine(Config.SQLALCHEMY_DATABASE_URL)
-#models.Base.metadata.create_all(bind=engine)
-
 # Include routes
 app.include_router(ip_to_geolocation_routes.router)
 
