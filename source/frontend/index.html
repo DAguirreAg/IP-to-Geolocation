@@ -15,23 +15,64 @@
 <body>
 
     <div class="content">
-        <div id="feedback-panel">
+        <div id="ipAddress-panel">
             <h1>Geolocation Search</h1>
             <h3>Enter an IP address to obtain geolocation information.</h3>
             
-            <form method="get" id="ipAddressForm"></form>
+            <form method="get" id="ipAddressForm">
                 <div>
                     <label for="ipAddress">IP address:</label>
                     <input type="text" name="ipAddress" placeholder="12.34.567.89">
                 </div>
                 <div>
-                    <input id="feedbackSubmitButton" type="button" class="btn btn-warning" value="Submit">
+                    <input id="ipAddressSubmitButton" type="button" class="btn btn-warning" value="Submit" onclick="submitForm()">
                 </div>
             </form>
         </div>
 
-
     </div>
+
     
+    <script>
+
+        // Post form data
+        function submitForm() {
+
+            var formElement = document.getElementById('ipAddressForm');
+            var data = new FormData(formElement);
+            
+            // Check if it is a valid email address
+            function check_valid_ip_address() {
+                ipAddress = data.get('ipAddress');
+
+                const res = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+                if (res.test(String(ipAddress))) {
+                    return true;
+                } else {
+                    alert('IP format not correct. Please revise it.');
+                    return false;
+                };
+                
+            };
+
+            // Get IP's Geolocation data
+            function get_ip_geolocation() {
+                ipAddress = data.get('ipAddress');
+                
+                $.get("http://127.0.0.1:8000/geolocation?ip=" + ipAddress, function(data, status){
+                    alert("Country code: " + data['countryCode'])
+                });
+            };
+
+            // Send form data if correct
+            if (check_valid_ip_address()){
+                get_ip_geolocation();
+            }; 
+
+        }
+
+    </script>
+
 </body>
 </html>

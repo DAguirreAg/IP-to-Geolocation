@@ -10,7 +10,7 @@ body {
     max-width: 500px;
 }
 
-#feedback-panel {
+#ipAddress-panel {
     background-color: #161b22;
     padding: 30px;
     margin: 20px;
@@ -21,11 +21,7 @@ body {
     width: 100%;
 }
 
-.input {
-    
-}
-
-#feedbackSubmitButton {
+#ipAddressSubmitButton {
     background-color: darkgoldenrod;
     border: none;
     padding: 10px 20px;
@@ -34,6 +30,7 @@ body {
     display: block;
 }
 
-#feedbackSubmitButton:hover {
+#ipAddressSubmitButton:hover {
     cursor: pointer;
+    background-color: yellow;
 }

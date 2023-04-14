@@ -22,11 +22,11 @@ def get_geolocation(ip: str, db: Session = Depends(get_db)):
     results = db.query(models.IP_Geolocation).filter(models.IP_Geolocation.ip_from <= ip_base10).filter(models.IP_Geolocation.ip_to >= ip_base10).first()
 
     if results is None:
-        return {'country': 'Unknown'}
+        return {'countryCode': 'Unknown'}
     
     country = results.country
 
-    return {'country': country}
+    return {'countryCode': country}
 
 
 @router.post("/new_geolocation_data")
