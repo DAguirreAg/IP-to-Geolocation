@@ -10,7 +10,7 @@ This repository aims at implementing a web service for users to identify where a
 
 <div>
 	<div align="middle">
-		<img src="documentation/Frontend view.png" alt="Frontend view" height=300>
+		<img src="documentation/Frontend view.png" alt="Frontend view" height=250>
 	  	<img src="documentation/Database table content view.png" alt="Database table content view" height=300>
 	</div>
 	<div align="middle">
@@ -32,7 +32,7 @@ Follow the next steps:
 
 <div>
 	<div align="middle">
-		<img src="documentation/Running the backend service.png" alt="Running the backend service" width=800>
+		<img src="documentation/Running the backend service.png" alt="Running the backend service" width=900>
 	</div>
 	<div align="middle">
 	  <i>Running the backend service.</i>
@@ -44,7 +44,7 @@ Follow the next steps:
 
 <div>
 	<div align="middle">
-		<img src="documentation/Running the frontend.png" alt="Running the frontend" width=400>
+		<img src="documentation/Running the frontend.png" alt="Running the frontend" height=300>
 	</div>
 	<div align="middle">
 	  <i>Running the frontend.</i>
@@ -58,7 +58,7 @@ Follow the next steps:
 
 <div>
 	<div align="middle">
-		<img src="documentation/Uploading new data.png" alt="Uploading new data" width=400>
+		<img src="documentation/Uploading new data.png" alt="Uploading new data" height=300>
 	</div>
 	<div align="middle">
 	  <i>Running the frontend.</i>
@@ -110,7 +110,7 @@ The application structure is pretty simple. It is composed of two API endpoints.
 * `/new_geolocation_data`: It is a utility function to facilitate the refresh and upload of the database table that contains the mapping from IP ranges to countries. (Note that in production environments, this endpoint should be only accessible to authorized users, as it allows to upload any data in the database).
 
 <p align="middle">
-  <img src="documentation/Endpoints.png" alt="Endpoints" height=200></br>
+  <img src="documentation/Endpoints.png" alt="Endpoints" height=300></br>
   <i>Endpoints.</i>
 </p>
 
