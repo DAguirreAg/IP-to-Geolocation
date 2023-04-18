@@ -54,7 +54,7 @@ Follow the next steps:
 * Upload data:
     * Download the `geolite2-country-ipv4.csv` file from [here](https://github.com/sapics/ip-location-db).
     * Open a browser and type `http://127.0.0.1:8000/docs` in the address bar to open an interactive view of the backend service.
-    * Press the `Try out` option, select the downloaded file and press `XXXXX` to upload the file.
+    * Press the `Try out` option, select the downloaded file and press `Execute` to upload the file.
 
 <div>
 	<div align="middle">
