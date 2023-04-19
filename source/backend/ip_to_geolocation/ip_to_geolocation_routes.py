@@ -43,8 +43,8 @@ def upload(file: UploadFile = File(...), db: Session = Depends(get_db)):
 
         ## Upload data
         ### Truncate existing data
-        db.execute('''TRUNCATE TABLE ip_geolocation''')
-        db.commit()
+        #db.execute('''TRUNCATE TABLE ip_geolocation''')
+        #db.commit()
         
         engine = db.get_bind()
         df.to_sql('ip_geolocation', con=engine, if_exists='append', index=False, index_label='id')
