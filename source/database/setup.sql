@@ -10,3 +10,7 @@ CREATE TABLE ip_geolocation (
 	country VARCHAR,
 	updated_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Create indexes
+--- Index for speeding IP search
+CREATE INDEX idx_ip_geolocation_ip_from_ip_to ON ip_geolocation (ip_from, ip_to, country);
