@@ -24,6 +24,13 @@
                     <label for="ipAddress">IP address:</label>
                     <input type="text" name="ipAddress" placeholder="12.34.123.89">
                 </div>
+                <br>
+                <div>
+                    <label for="ipDate">IP date (Optional*):</label>
+                    <input type="date" name="ipDate">
+                    <p class="note">* If a date is provided, the closest value to the provided date will be retrieved. Else, the latest data will be retrieved.</p>
+                </div>
+                    
                 <div>
                     <input id="ipAddressSubmitButton" type="button" class="btn btn-warning" value="Submit" onclick="submitForm()">
                 </div>
@@ -41,7 +48,7 @@
             var formElement = document.getElementById('ipAddressForm');
             var data = new FormData(formElement);
             
-            // Check if it is a valid email address
+            // Check if it is a valid ip address
             function check_valid_ip_address() {
                 ipAddress = data.get('ipAddress');
 
@@ -53,20 +60,43 @@
                     alert('IP format not correct. Please revise it.');
                     return false;
                 };
-                
+            };
+
+            // Check if it is a valid ip address
+            function check_valid_date() {
+                ipDate = data.get('ipDate');
+
+                if (ipDate == '') {
+                    return true;
+                };
+
+                const res = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+
+                if (res.test(String(ipDate))) {
+                    return true;
+                } else {
+                    alert('Date format not correct. Please revise it.');
+                    return false;
+                };  
             };
 
             // Get IP's Geolocation data
             function get_ip_geolocation() {
                 ipAddress = data.get('ipAddress');
-                
-                $.get("http://127.0.0.1:8000/geolocation?ip=" + ipAddress, function(data, status){
+                ipDate = data.get('ipDate')
+
+                var endpoint_url = "http://127.0.0.1:8000/geolocation?ip=" + ipAddress
+                if (ipDate != '') {
+                    endpoint_url += "&" + "ipDate=" + ipDate
+                };
+
+                $.get(endpoint_url, function(data, status){
                     alert("Country code: " + data['countryCode'])
                 });
             };
 
             // Send form data if correct
-            if (check_valid_ip_address()){
+            if (check_valid_ip_address() & check_valid_date()){
                 get_ip_geolocation();
             }; 
 
