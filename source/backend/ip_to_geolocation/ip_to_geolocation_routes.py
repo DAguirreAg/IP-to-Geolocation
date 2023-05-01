@@ -46,33 +46,3 @@ def get_geolocation(ip: str, ipDate: str | None = None, db: Session = Depends(ge
     country = results.country
 
     return {'countryCode': country}
-
-
-@router.post("/new_geolocation_data")
-def upload(file: UploadFile = File(...), db: Session = Depends(get_db)):
-    try:
-        # Check if it is a CSV
-        if file.filename.split('.')[-1] != 'csv':
-            raise Exception("There was an error uploading the file. Expected a CSV file format.")
-
-        # Replace DB data with newer data
-        ## Load CSV and prepare data
-        df = pd.read_csv(file.file, header = None)
-        df = df.rename({0:'ip_from', 1:'ip_to', 2:'country'}, axis=1)
-
-        ## Upload data
-        ### Truncate existing data
-        #db.execute('''TRUNCATE TABLE ip_geolocation''')
-        #db.commit()
-        
-        engine = db.get_bind()
-        df.to_sql('ip_geolocation', con=engine, if_exists='append', index=False, index_label='id')
-
-
-    except Exception as e:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
-
-    finally:
-        file.file.close()
-
-    return {"message": f"Successfully uploaded {file.filename}"}
