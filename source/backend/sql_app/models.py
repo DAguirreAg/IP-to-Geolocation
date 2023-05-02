@@ -6,7 +6,7 @@ class IP_Geolocation(Base):
 
     ip_from = Column(Integer)
     ip_to = Column(Integer)
-    country = Column(String)
+    country_code = Column(String)
     updated_at = Column(DateTime)
 
     PrimaryKeyConstraint(ip_from, ip_to, name='id')

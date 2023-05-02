@@ -43,6 +43,6 @@ def get_geolocation(ip: str, ipDate: str | None = None, db: Session = Depends(ge
     if results is None:
         return {'countryCode': 'Unknown'}
     
-    country = results.country
+    countryCode = results.country_code
 
-    return {'countryCode': country}
+    return {'countryCode': countryCode}

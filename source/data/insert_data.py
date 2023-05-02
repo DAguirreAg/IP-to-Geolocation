@@ -14,7 +14,7 @@ OUTPUT_FOLDER = "files"
 OUTPUT_SCHEMA = {
     'ip_from' : 'int64',
     'ip_to' : 'int64',
-    'country' : 'object'
+    'country_code' : 'object'
 }
 
 ## Database
@@ -49,7 +49,7 @@ def convert_csv_to_datatframe(content):
     
     # Read file and convert to right format
     dff = pd.read_csv(io.StringIO(content.decode('utf-8')), header=None)
-    dff = dff.rename({0:'ip_from', 1:'ip_to', 2:'country'}, axis=1)
+    dff = dff.rename({0:'ip_from', 1:'ip_to', 2:'country_code'}, axis=1)
     
     return dff
 
