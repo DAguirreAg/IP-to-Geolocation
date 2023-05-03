@@ -13,4 +13,4 @@ CREATE TABLE ip_geolocation (
 
 -- Create indexes
 --- Index for speeding IP search
-CREATE INDEX idx_ip_geolocation_ip_from_ip_to ON ip_geolocation (ip_from, ip_to, country_code);
+CREATE INDEX idx_ip_geolocation_ip_from_ip_to ON ip_geolocation (ip_from, ip_to);
