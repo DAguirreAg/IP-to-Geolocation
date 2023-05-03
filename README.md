@@ -52,16 +52,16 @@ Follow the next steps:
 </div>
 
 * Upload data:
-    * Download the `geolite2-country-ipv4.csv` file from [here](https://github.com/sapics/ip-location-db).
-    * Open a browser and type `http://127.0.0.1:8000/docs` in the address bar to open an interactive view of the backend service.
-    * Press the `Try out` option, select the downloaded file and press `Execute` to upload the file.
+	  * Install the required python packages via `pip install -r requirements.txt`. (It is recommended to use virtual environments when installing them to avoid conflicting version issues).
+	  * Open a terminal window and type `python insert_data.py` to download the data and upload it.
+	  * (Optional) Schedule the script to run automatically on a weekly basis.
 
 <div>
 	<div align="middle">
 		<img src="documentation/Uploading new data.png" alt="Uploading new data" height=300>
 	</div>
 	<div align="middle">
-	  <i>Running the frontend.</i>
+	  <i>Uploading new data.</i>
 	</div>
 </div>
 
@@ -72,12 +72,16 @@ Follow the next steps:
 Find below a rough estimation of database requirements.
 
 Assumptions:
+
 * Amount of IP ranges: 240k
-* Hold histrical records: No
+* Hold historical records: Yes
+* Data refresh rate: Weekly
+* Data history retention: 5 years
 
 Database size:
+
 * Record size: 2*64 (BIGINT) + 13 (TIMESTAMP) + 4 (VARCHAR) = 145 bytes 
-* Required database size: 145 * 240k = 34 Mb
+* Required database size: 145 * 240k * 52 (weeks/year) * 5 (years) = 9 Gb
 
 ### 3.2. Technology stack
 
@@ -93,7 +97,7 @@ The architecture of the code works in the following way:
 * A HTML form allows the user to input his feedback and submit it via JQuery to the server.
 * The server running the backend (implemented in FastAPI) will receive the form data and, if correct, it will add it to the database.
 
-Note that a microservice architecture philosophy was followed, as this should allow the application to receive feedback from users even when the other services are down (as long as they are not located in the same machines).
+Note that a microservice architecture philosophy was followed, as this should allow the application to receive requests from users even when the other services are down (as long as they are not located in the same machines).
 
 <div>
 	<div align="middle">
@@ -105,22 +109,21 @@ Note that a microservice architecture philosophy was followed, as this should al
 </div>
 
 ### 3.4. Endpoints
-The application structure is pretty simple. It is composed of two API endpoints. 
+The application structure is pretty simple. It is composed of one API endpoint:
+
 * `/geolocation`: It expects an IP address as an input and outputs the country from which the given IP originated from.
-* `/new_geolocation_data`: It is a utility function to facilitate the refresh and upload of the database table that contains the mapping from IP ranges to countries. (Note that in production environments, this endpoint should be only accessible to authorized users, as it allows to upload any data in the database).
 
 <p align="middle">
   <img src="documentation/Endpoints.png" alt="Endpoints" height=300></br>
-  <i>Endpoints.</i>
+  <i>Endpoint/s.</i>
 </p>
 
 ## 3. Future functionalities/Considerations
-As a proof of concept of a IP-to-Geolocation application, the source code doesn't implement all the functionalities that this kind of applications should have. On one hand, only the country of origin is being retrieved (no province or cities are being provided). On the other hand, the data in the database is expected to be manually uploaded, which can be time consuming as well as introduce human errors in the process. Also, this operation is not done in the background, which causes a blocking issue (although it is not a big deal with such a small dataset). It should also be noted that the data upload endpoint is directly exposed via the API service. This steps should be moved to an independent service, to avoid unwanted uploads to the database.
+As a proof of concept of a IP-to-Geolocation application, the source code doesn't implement all the functionalities that this kind of applications should have. On one hand, only the country of origin is being retrieved (no province or cities are being provided). On the other hand, the data in the database is expected to be manually uploaded, which can be time consuming as well as introduce human errors in the process. Also, this operation is not done in the background, which causes a blocking issue (although it is not a big deal with such a small dataset).
 
 Find below a list of functionalities that will need to be considered implementing in the current repository to make it fully functional as well as some nice-to-have functionalities: 
 
 * Province and city data should be added to the database to make the queries more complete and useful.
-* One of the endpoints is used to upload CSV data into the Database. In production settings, these endpoint should only be accessible to authorized people, to avoid people uploading erroneous data.
 * Upload file's content should be sanitized to ensure no malicious code is placed in the database.
 * For this small size database, it should be possible to implement a in-memory database, to speed up the queries. 
 * It should be possible to implement a date dependant search option, to know from where a given IP come from in a given moment in time.
