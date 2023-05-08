@@ -58,7 +58,7 @@ Follow the next steps:
 
 <div>
 	<div align="middle">
-		<img src="documentation/Uploading new data.png" alt="Uploading new data" height=300>
+		<img src="documentation/Uploading new data.png" alt="Uploading new data" width=800>
 	</div>
 	<div align="middle">
 	  <i>Uploading new data.</i>
