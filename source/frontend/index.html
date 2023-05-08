@@ -91,8 +91,14 @@
                 };
 
                 $.get(endpoint_url, function(data, status){
-                    alert("Country code: " + data['countryCode'])
-                });
+                    alert("Country code: " + data['countryCode']);
+                })
+                .fail(function(data, status) {
+                    var status_code = data["status"];
+                    var error_message = JSON.parse(data["responseText"])["detail"];
+                    alert(error_message + " (Status code: " + status_code + ").");
+                })
+
             };
 
             // Send form data if correct

@@ -21,14 +21,14 @@ def get_geolocation(ip: str, ipDate: str | None = None, db: Session = Depends(ge
     try:
         ipaddress.IPv4Address(ip)
     except ipaddress.AddressValueError:
-        return {'ERROR' : 'IP4 address not correct!'}
+        raise HTTPException(status_code=400, detail="IP4 address not correct")
 
     ## Date
     if ipDate:
         try:
             ipDate = datetime.strptime(ipDate, '%Y-%m-%d')
         except Exception as e:
-            return {'ERROR' : 'Date format not correct!'}
+            raise HTTPException(status_code=400, detail="Date format not correct")
 
     # Convert IP to number
     octets = [int(i) for i in ip.split('.')]
