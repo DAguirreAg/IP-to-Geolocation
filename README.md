@@ -118,7 +118,7 @@ The application structure is pretty simple. It is composed of one API endpoint:
   <i>Endpoint/s.</i>
 </p>
 
-## 3. Future functionalities/Considerations
+## 4. Future functionalities/Considerations
 As a proof of concept of a IP-to-Geolocation application, the source code doesn't implement all the functionalities that this kind of applications should have. On one hand, only the country of origin is being retrieved (no province or cities are being provided). On the other hand, the data in the database is expected to be manually uploaded, which can be time consuming as well as introduce human errors in the process. Also, this operation is not done in the background, which causes a blocking issue (although it is not a big deal with such a small dataset).
 
 Find below a list of functionalities that will need to be considered implementing in the current repository to make it fully functional as well as some nice-to-have functionalities: 
@@ -128,7 +128,7 @@ Find below a list of functionalities that will need to be considered implementin
 * For this small size database, it should be possible to implement a in-memory database, to speed up the queries. 
 * It should be possible to implement a date dependant search option, to know from where a given IP come from in a given moment in time.
 
-## 4. Disclaimers
+## 5. Disclaimers
 This is a proof of concept project that aims to shown how a IP-to-Geolocation service works. Bear in mind, that as many POC, it is not a final product and many points need to be considered before making the code production ready.
 
 ## References
