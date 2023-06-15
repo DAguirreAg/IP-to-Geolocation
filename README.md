@@ -104,7 +104,7 @@ Note that a microservice architecture philosophy was followed, as this should al
 		<img src="documentation/Main design.png" alt="Main design" width=900>
 	</div>
 	<div align="middle">
-	  <i>Overview of frontend and database.</i>
+	  <i>Overview of architectural design.</i>
 	</div>
 </div>
 
