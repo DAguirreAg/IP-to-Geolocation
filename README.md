@@ -22,13 +22,13 @@ This repository aims at implementing a web service for users to identify where a
 Follow the next steps:
 
 * Prepare the database:
-	  * Open your favourite SQL database and create the database and the table using `setup.sql` helper script.
-	  * Open the `config.py` file and modify the `SQLALCHEMY_DATABASE_URL` to use the database you just created.
+	* Open your favourite SQL database and create the database and the table using `setup.sql` helper script.
+	* Open the `config.py` file and modify the `SQLALCHEMY_DATABASE_URL` to use the database you just created.
 
 * Prepare the backend service:
-	  * Install the required python packages via `pip install -r requirements.txt`. (It is recommended to use virtual environments when installing them to avoid conflicting version issues).
-	  * Open a terminal window and type `uvicorn main:app --reload` to launch the application.
-	  * (Optional) Open a browser and type `http://127.0.0.1:8000/docs` in the address bar to open an interactive view of the backend service.
+	* Install the required python packages via `pip install -r requirements.txt`. (It is recommended to use virtual environments when installing them to avoid conflicting version issues).
+	* Open a terminal window and type `uvicorn main:app --reload` to launch the application.
+	* (Optional) Open a browser and type `http://127.0.0.1:8000/docs` in the address bar to open an interactive view of the backend service.
 
 <div>
 	<div align="middle">
@@ -40,7 +40,7 @@ Follow the next steps:
 </div>
 
 * Prepare the frontend:
-	  * Run the `index.html` in a live server and open the provided URL. (I recommend using VScode's Live server plug-in due to its ease of use)
+	* Run the `index.html` in a live server and open the provided URL. (I recommend using VScode's Live server plug-in due to its ease of use)
 
 <div>
 	<div align="middle">
@@ -52,9 +52,9 @@ Follow the next steps:
 </div>
 
 * Upload data:
-	  * Install the required python packages via `pip install -r requirements.txt`. (It is recommended to use virtual environments when installing them to avoid conflicting version issues).
-	  * Open a terminal window and type `python insert_data.py` to download the data and upload it.
-	  * (Optional) Schedule the script to run automatically on a weekly basis.
+	* Install the required python packages via `pip install -r requirements.txt`. (It is recommended to use virtual environments when installing them to avoid conflicting version issues).
+	* Open a terminal window and type `python insert_data.py` to download the data and upload it.
+	* (Optional) Schedule the script to run automatically on a weekly basis.
 
 <div>
 	<div align="middle">
