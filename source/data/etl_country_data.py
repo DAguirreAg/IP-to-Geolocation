@@ -33,8 +33,7 @@ def insert_data_into_db(dff, sql_db_url):
     engine = create_engine(sql_db_url)
     dff.to_sql('ip_geolocation_country', con=engine, if_exists='append', index=False, index_label='id')
 
-if __name__ == "__main__":
-    
+def main():
     # Get CSV filename
     filename = get_latest_file(Config.RAW_FOLDER_COUNTRY_DATA)
     
@@ -49,3 +48,6 @@ if __name__ == "__main__":
     
     # Load (Upload data)
     insert_data_into_db(df, Config.SQLALCHEMY_DATABASE_URL)
+
+if __name__ == "__main__":
+    main()

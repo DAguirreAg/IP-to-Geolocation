@@ -6,9 +6,8 @@ FILES_PATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $FILES_PATH/venv/bin/activate
 
 # Execute Python script
-python3 $FILES_PATH/"country_data_downloader.py"
-python3 $FILES_PATH/"city_data_downloader.py"
-#python3 $FILES_PATH/"country_data_uploader.py"
+python3 $FILES_PATH/"downloader_country_data.py"
+python3 $FILES_PATH/"etl_country_data.py"
 
 # Deactivate the virtual environment
 deactivate
