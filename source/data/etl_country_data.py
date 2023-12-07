@@ -31,7 +31,7 @@ def insert_data_into_db(dff, sql_db_url):
     
     # Connect to DB and insert data
     engine = create_engine(sql_db_url)
-    dff.to_sql('ip_geolocation', con=engine, if_exists='append', index=False, index_label='id')
+    dff.to_sql('ip_geolocation_country', con=engine, if_exists='append', index=False, index_label='id')
 
 if __name__ == "__main__":
     

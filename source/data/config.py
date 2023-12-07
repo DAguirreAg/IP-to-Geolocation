@@ -15,11 +15,11 @@ class Config:
     }
     
     # CITY DATA
+    '''
     URL_CITY_DATA = 'https://github.com/sapics/ip-location-db/raw/master/geolite2-city/geolite2-city-ipv4-num.csv.gz'
     RAW_FOLDER_CITY_DATA = './downloads/city_level_files/'
     FILENAME_PREFIX_CITY_DATA = 'geolite2-city-ipv4-num'
-
-    '''
+    
     SCHEMA_CITY_DATA = {
         'ip_from' : 'int64',
         'ip_to' : 'int64',
