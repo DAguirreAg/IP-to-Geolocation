@@ -1,0 +1,35 @@
+version: '3.6'
+
+services:
+
+  frontend:
+    image: test-fe
+    ports:
+      - "8000:80"
+    expose:
+      - "80"
+
+  backend:
+    image: test-be
+    ports:
+      - "8103:80"
+    expose:
+      - "80"
+
+  db:
+    image: test-db-ip-to-geo
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: db_ip_to_geolocation
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+
+  data-engineering:
+    image: test-de
+    ports:
+      - "8104:80"
+    expose:
+      - "80"
