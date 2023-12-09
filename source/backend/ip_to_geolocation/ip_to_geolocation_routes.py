@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile
 from sqlalchemy.orm import Session
 import starlette.status as status
+from typing import Optional
 from dependencies import get_db
 from sql_app import models
 import pandas as pd
@@ -14,7 +15,10 @@ router = APIRouter(
 )
 
 @router.get('/geolocation')
-def get_geolocation(ip: str, ipDate: str | None = None, db: Session = Depends(get_db)):
+def get_geolocation(ip: str, ipDate: Optional[str] = None, db: Session = Depends(get_db)):
+
+    #def get_geolocation(ip: str, ipDate: str | None = None, db: Session = Depends(get_db)):
+   
 
     # Validate inputs
     # IP4 address
