@@ -5,7 +5,8 @@ from datetime import datetime
 
 import requests
 
-PORT = 8102
+HOSTNAME = "localhost"
+PORT = 80
 
 def call_api(url: str):
     response = requests.get(url)
@@ -14,11 +15,11 @@ def call_api(url: str):
         raise Exception('Something went wrong.')
 
 def _download_country_data():
-    url = f"http://localhost:{PORT}/download_country_data"    
+    url = f"http://{HOSTNAME}:{PORT}/download_country_data"    
     call_api(url)
     
 def _etl_country_data():
-    url = f"http://localhost:{PORT}/etl_country_data"    
+    url = f"http://{HOSTNAME}:{PORT}/etl_country_data"    
     call_api(url)
 
 with DAG("ip_to_geolocation_country_dag", # Dag id
