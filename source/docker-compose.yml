@@ -12,7 +12,7 @@ services:
   backend:
     image: test-be
     ports:
-      - "8103:80"
+      - "8001:80"
     expose:
       - "80"
 
@@ -30,6 +30,6 @@ services:
   data-engineering:
     image: test-de
     ports:
-      - "8104:80"
+      - "8002:80"
     expose:
       - "80"
