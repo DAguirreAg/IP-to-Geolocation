@@ -1,0 +1,16 @@
+version: '3.6'
+
+services:
+  postgres:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: db_ip_to_geolocation
+    image: postgres:latest
+    volumes:
+      - /home/daniel/Documents/GitHub/IP-to-Geolocation/source/database:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    restart: always
