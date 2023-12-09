@@ -22,7 +22,7 @@ def save_file_to_csv(content, output_folder, filename_prefix):
     filename = filename_prefix + "_" +  dt + ".csv"
     
     # Create CSV file
-    filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), output_folder, filename)
+    filepath = os.path.join(output_folder, filename)
     open(filepath, 'wb').write(content)
     
 def get_latest_file(path, file_format='*csv'):
